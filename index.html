@@ -102,59 +102,56 @@
   <label class="gl"><input type="checkbox" id="gl"> SHOW ALIGNMENT GRID</label>
   <p id="fix-out" class="he he-left" lang="he" dir="rtl" role="status">לחצו על אחת הנקודות המסומנות.</p>
 
-  <!-- MAZE mini challenges -->
+  <!-- MAZE mini challenges: everyday customer decisions -->
   <div class="game-hub" id="game-hub">
     <div class="game-intro">
-      <p class="tech">INTERACTIVE DETOUR / 001—003</p>
-      <h3>DON’T JUST LOOK. FIGURE IT OUT.</h3>
-      <p lang="he" dir="rtl">שלושה אתגרים קצרים. בלי ניקוד על טעם — רק קצת חשיבה עיצובית.</p>
+      <p class="tech">A QUICK DETOUR / 001—003</p>
+      <h3>TAKE A SECOND LOOK.</h3>
+      <p lang="he" dir="rtl">לא צריך להבין בעיצוב. רק להיכנס לרגע לנעליים של הלקוחות שלכם.</p>
     </div>
-    <div class="game-tabs" role="group" aria-label="Choose a challenge">
-      <button type="button" data-game="spot" aria-pressed="true"><span>01</span> SPOT THE PROBLEM</button>
-      <button type="button" data-game="call" aria-pressed="false"><span>02</span> MAKE THE CALL</button>
-      <button type="button" data-game="unlock" aria-pressed="false"><span>03</span> UNLOCK THE DESIGN</button>
+    <div class="game-tabs" role="group" aria-label="בחירת משחק">
+      <button type="button" data-game="need" aria-pressed="true"><span>01</span> מה חשוב ללקוח?</button>
+      <button type="button" data-game="ad" aria-pressed="false"><span>02</span> על איזו מודעה תלחצו?</button>
+      <button type="button" data-game="next" aria-pressed="false"><span>03</span> מה עושים עכשיו?</button>
     </div>
 
-    <section class="game-panel" data-panel="spot" aria-labelledby="spot-title">
-      <div class="game-panel-head"><p class="tech">CASE 001 / VISUAL INVESTIGATION</p><span class="game-count" id="spot-count">0 / 3 CLUES</span></div>
-      <h4 id="spot-title">Something is off. Find all three.</h4>
-      <p class="game-copy" lang="he" dir="rtl">במודעה הפיקטיבית הזאת מסתתרות שלוש בעיות. לחצו על האזורים החשודים כדי לחשוף אותן.</p>
-      <div class="spot-board" id="spot-board" lang="he" dir="rtl">
-        <div class="spot-ad-top"><span>סטודיו תמר</span><small>ההרשמה פתוחה</small></div>
-        <div class="spot-ad-middle"><strong>הכל. לכולם. עכשיו!!!</strong><p>סדנאות יצירה לכל הגילאים</p></div>
-        <div class="spot-ad-bottom"><span>יום שלישי | 18:00</span><b>פרטים והרשמה</b><small>רח׳ הגפן 12 · 050-1234567</small></div>
-        <button type="button" class="spot-target target-one" data-spot="1" aria-label="בדיקת אזור הכותרת">01</button>
-        <button type="button" class="spot-target target-two" data-spot="2" aria-label="בדיקת אזור הפרטים">02</button>
-        <button type="button" class="spot-target target-three" data-spot="3" aria-label="בדיקת אזור הפעולה">03</button>
+    <section class="game-panel" data-panel="need" aria-labelledby="need-title">
+      <div class="game-panel-head"><p class="tech">01 / GET TO KNOW YOUR CUSTOMER</p><span class="game-count">בחירה אחת</span></div>
+      <h4 id="need-title" lang="he" dir="rtl">נכנסתם לעמוד של עסק חדש. מה תחפשו קודם?</h4>
+      <p class="game-copy" lang="he" dir="rtl">דמיינו שאתם מחפשים בעל מקצוע או שירות. מה יעזור לכם להחליט אם להמשיך?</p>
+      <div class="simple-options" role="group" aria-label="מה חשוב לכם לדעת?">
+        <button type="button" data-need="service"><span>01</span><strong>מה בדיוק אפשר לקבל כאן?</strong></button>
+        <button type="button" data-need="price"><span>02</span><strong>כמה זה עולה?</strong></button>
+        <button type="button" data-need="trust"><span>03</span><strong>מי עומד מאחורי העסק?</strong></button>
       </div>
-      <p class="game-feedback" id="spot-feedback" role="status" aria-live="polite" lang="he" dir="rtl">רמז: חפשו היררכיה, קריאות ופעולה ברורה.</p>
-      <button type="button" class="game-reset" id="spot-reset">RESET INVESTIGATION ↻</button>
+      <p class="game-feedback" id="need-feedback" role="status" aria-live="polite" lang="he" dir="rtl">אין תשובה לא נכונה. בחרו את מה שהכי חשוב לכם.</p>
     </section>
 
-    <section class="game-panel" data-panel="call" aria-labelledby="call-title" hidden>
-      <div class="game-panel-head"><p class="tech">CASE 002 / CREATIVE DECISION</p><span class="game-count">NO PERFECT ANSWER</span></div>
-      <h4 id="call-title">The client says: “Make it pop.”</h4>
-      <p class="game-copy" lang="he" dir="rtl">לקוח מבקש להבליט את כל האלמנטים במודעה. מה השאלה הראשונה שכדאי לשאול?</p>
-      <div class="call-options" role="group" aria-label="Choose your response">
-        <button type="button" data-call="a"><span>A</span><strong>“איזה צבע הכי חזק?”</strong><small>מתחילים מהצבע</small></button>
-        <button type="button" data-call="b"><span>B</span><strong>“מה הדבר האחד שהקהל חייב להבין?”</strong><small>מתחילים מהמטרה</small></button>
+    <section class="game-panel" data-panel="ad" aria-labelledby="ad-title" hidden>
+      <div class="game-panel-head"><p class="tech">02 / FIRST IMPRESSION</p><span class="game-count">איזו מודעה ברורה יותר?</span></div>
+      <h4 id="ad-title" lang="he" dir="rtl">אתם מחפשים סדנת קרמיקה. איזו מודעה תגרום לכם לעצור?</h4>
+      <p class="game-copy" lang="he" dir="rtl">שתיהן מציעות את אותו הדבר. בחרו את המודעה שהייתם מבינים מהר יותר.</p>
+      <div class="ad-choices" role="group" aria-label="בחירת מודעה">
+        <button type="button" data-ad="a" class="sample-ad sample-ad-a" lang="he" dir="rtl">
+          <span class="sample-tag">סטודיו תמר</span><strong>יצירה. חוויה. השראה.</strong><span>סדנאות · חוגים · מתנות · אירועים</span><b>לפרטים והרשמה</b>
+        </button>
+        <button type="button" data-ad="b" class="sample-ad sample-ad-b" lang="he" dir="rtl">
+          <span class="sample-tag">סטודיו תמר</span><strong>בואו ליצור<br>כלי קרמיקה משלכם</strong><span>סדנה למתחילים | יום חמישי 18:00</span><b>לשמירת מקום</b>
+        </button>
       </div>
-      <p class="game-feedback" id="call-feedback" role="status" aria-live="polite" lang="he" dir="rtl">בחרו תשובה כדי לפתוח את ההסבר.</p>
-      <button type="button" class="game-reset" id="call-reset">TRY AGAIN ↻</button>
+      <p class="game-feedback" id="ad-feedback" role="status" aria-live="polite" lang="he" dir="rtl">בחרו את המודעה שהייתם לוחצים עליה.</p>
     </section>
 
-    <section class="game-panel" data-panel="unlock" aria-labelledby="unlock-title" hidden>
-      <div class="game-panel-head"><p class="tech">CASE 003 / INFORMATION ARCHITECTURE</p><span class="game-count" id="unlock-count">0 / 3 PLACED</span></div>
-      <h4 id="unlock-title">Unlock the design.</h4>
-      <p class="game-copy" lang="he" dir="rtl">יש לכם שלושה פרטי מידע. בחרו אותם לפי הסדר שבו לקוח חדש צריך לפגוש אותם: מה העסק מציע, למה לבחור בו, ואיך יוצרים קשר.</p>
-      <div class="unlock-options" role="group" aria-label="Choose the next information block">
-        <button type="button" data-order="offer"><span>01</span><strong>מה העסק מציע?</strong></button>
-        <button type="button" data-order="proof"><span>02</span><strong>למה לסמוך עליו?</strong></button>
-        <button type="button" data-order="action"><span>03</span><strong>איך מתקדמים?</strong></button>
+    <section class="game-panel" data-panel="next" aria-labelledby="next-title" hidden>
+      <div class="game-panel-head"><p class="tech">03 / MAKE IT EASY</p><span class="game-count">צעד אחד קטן</span></div>
+      <h4 id="next-title" lang="he" dir="rtl">מצאתם עסק שמעניין אתכם. מה תרצו לעשות?</h4>
+      <p class="game-copy" lang="he" dir="rtl">בחרו מה הייתם מצפים למצוא בעמוד של העסק.</p>
+      <div class="simple-options" role="group" aria-label="מה תרצו לעשות?">
+        <button type="button" data-next="contact"><span>01</span><strong>לשאול שאלה או לקבוע שיחה</strong></button>
+        <button type="button" data-next="more"><span>02</span><strong>לראות עוד דוגמאות לעבודות</strong></button>
+        <button type="button" data-next="about"><span>03</span><strong>לקרוא עוד על העסק</strong></button>
       </div>
-      <ol class="unlock-sequence" id="unlock-sequence" aria-label="Your chosen order"></ol>
-      <p class="game-feedback" id="unlock-feedback" role="status" aria-live="polite" lang="he" dir="rtl">בחרו את הבלוק הראשון.</p>
-      <button type="button" class="game-reset" id="unlock-reset">START OVER ↻</button>
+      <p class="game-feedback" id="next-feedback" role="status" aria-live="polite" lang="he" dir="rtl">בחרו את הצעד שהכי טבעי לכם.</p>
     </section>
   </div>
   <a class="btn" href="#contact">SKIP TO CONTACT</a>

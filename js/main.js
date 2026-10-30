@@ -13,7 +13,7 @@
     var r = rev.getBoundingClientRect(), t = e.touches ? e.touches[0] : e;
     rev.style.setProperty('--x', (t.clientX - r.left) + 'px');
     rev.style.setProperty('--y', (t.clientY - r.top) + 'px');
-    rev.style.setProperty('--r', (window.innerWidth < 600 ? 100 : 155) + 'px');
+    rev.style.setProperty('--r', (window.innerWidth < 600 ? 72 : 118) + 'px');
   }
   if (!reduce) {
     ['pointermove', 'touchstart', 'touchmove'].forEach(function (ev) { rev.addEventListener(ev, setPos, { passive: true }); });
@@ -84,7 +84,7 @@
     });
   });
 
-  // MINI CHALLENGES: tabbed challenges with keyboard-friendly buttons and reset states.
+  // MINI CHALLENGES: simple, customer-first choices in everyday language.
   var gameTabs = $$('[data-game]'), gamePanels = $$('[data-panel]');
   gameTabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
@@ -93,76 +93,39 @@
     });
   });
 
-  // 01 — SPOT THE PROBLEM.
-  var spotNotes = {
-    1: 'נמצאה בעיית היררכיה: הכותרת צועקת, אבל לא מסבירה מה העסק מציע. קודם מנסחים מסר ברור, אחר כך מחליטים כמה חזק להציג אותו.',
-    2: 'נמצאה בעיית קריאות: פרטי המידע נדחסים לאזור אחד ובמשקלים דומים. צריך ליצור קבוצות ורווחים כדי שהעין תדע לאן להמשיך.',
-    3: 'נמצאה בעיית פעולה: הכפתור נראה כמו עוד שורת טקסט ולא ברור מה יקרה בלחיצה. פעולה מרכזית צריכה להיראות ולהישמע כמו פעולה.'
+  var needCopy = {
+    service: 'הגיוני לגמרי. לפני הכול, חשוב להבין אם העסק בכלל מציע את מה שאתם מחפשים. לכן כדאי להסביר בפשטות מה מקבלים.',
+    price: 'מחיר יכול להיות שיקול חשוב. אם אי אפשר לפרסם מחיר קבוע, אפשר לפחות להסביר מה משפיע עליו ואיך מקבלים הצעת מחיר.',
+    trust: 'ברור. כשמפקידים עבודה או כסף בידי עסק, רוצים לדעת מי עומד מאחוריו. תמונות, ניסיון והמלצות יכולים לעזור לבנות ביטחון.'
   };
-  var spotFound = {};
-  function updateSpot() {
-    var total = Object.keys(spotFound).length;
-    $('#spot-count').textContent = total + ' / 3 CLUES';
-    if (total === 3) $('#spot-feedback').textContent = 'CASE SOLVED. מצאתם את שלוש הבעיות. שימו לב: לא צריך לקשט יותר — צריך להחליט מה חשוב.';
-  }
-  $$('[data-spot]').forEach(function (target) {
-    target.addEventListener('click', function () {
-      var id = target.dataset.spot;
-      if (spotFound[id]) return;
-      spotFound[id] = true; target.classList.add('found'); target.setAttribute('aria-pressed', 'true');
-      $('#spot-feedback').textContent = spotNotes[id]; updateSpot();
+  $$('[data-need]').forEach(function (choice) {
+    choice.addEventListener('click', function () {
+      $$('[data-need]').forEach(function (b) { b.setAttribute('aria-pressed', b === choice ? 'true' : 'false'); });
+      $('#need-feedback').textContent = needCopy[choice.dataset.need];
     });
-  });
-  $('#spot-reset').addEventListener('click', function () {
-    spotFound = {};
-    $$('[data-spot]').forEach(function (target) { target.classList.remove('found'); target.setAttribute('aria-pressed', 'false'); });
-    $('#spot-feedback').textContent = 'רמז: חפשו היררכיה, קריאות ופעולה ברורה.'; updateSpot();
   });
 
-  // 02 — MAKE THE CALL. The explanation focuses on the reasoning, not a taste-based right answer.
-  var callCopy = {
-    a: 'צבע יכול למשוך תשומת לב, אבל הוא לא פותר חוסר בהירות. לפני שבוחרים צבע, צריך להבין מה הקהל אמור לקחת מהמודעה.',
-    b: 'בדיוק. כשמגדירים את המסר המרכזי, אפשר לבנות סביבו היררכיה, צבע, טיפוגרפיה וקריאה לפעולה. זו החלטה שמכוונת את כל העיצוב.'
+  var adCopy = {
+    a: 'המודעה הזאת נראית חגיגית, אבל לא ממש מספרת מה עושים, למי זה מתאים ומתי. כשצריך לנחש, קל להמשיך לגלול.',
+    b: 'זו בחירה ברורה יותר: מבינים מה מקבלים, למי זה מתאים ומתי. לא חייבים להעמיס מידע — רק לתת את הפרטים שעוזרים להחליט.'
   };
-  $$('[data-call]').forEach(function (choice) {
+  $$('[data-ad]').forEach(function (choice) {
     choice.addEventListener('click', function () {
-      $$('[data-call]').forEach(function (b) { b.setAttribute('aria-pressed', b === choice ? 'true' : 'false'); });
-      $('#call-feedback').textContent = callCopy[choice.dataset.call];
+      $$('[data-ad]').forEach(function (b) { b.setAttribute('aria-pressed', b === choice ? 'true' : 'false'); });
+      $('#ad-feedback').textContent = adCopy[choice.dataset.ad];
     });
-  });
-  $('#call-reset').addEventListener('click', function () {
-    $$('[data-call]').forEach(function (b) { b.removeAttribute('aria-pressed'); });
-    $('#call-feedback').textContent = 'בחרו תשובה כדי לפתוח את ההסבר.';
   });
 
-  // 03 — UNLOCK THE DESIGN. Build a sequence by choosing information blocks.
-  var orderLabels = { offer: 'מה העסק מציע?', proof: 'למה לסמוך עליו?', action: 'איך מתקדמים?' };
-  var orderExpected = ['offer', 'proof', 'action'], orderChosen = [];
-  function renderOrder() {
-    var list = $('#unlock-sequence'); list.textContent = '';
-    orderChosen.forEach(function (key, index) {
-      var item = document.createElement('li'); item.textContent = (index + 1) + '. ' + orderLabels[key]; list.appendChild(item);
-    });
-    $('#unlock-count').textContent = orderChosen.length + ' / 3 PLACED';
-  }
-  $$('[data-order]').forEach(function (choice) {
+  var nextCopy = {
+    contact: 'מעולה. אם הגעתם עד לכאן, כדאי שיהיה קל למצוא דרך ליצור קשר — בלי לחפש ובלי לנחש.',
+    more: 'בחירה טבעית. דוגמאות אמיתיות עוזרות להבין את איכות העבודה ולדמיין מה העסק יכול לעשות גם בשבילכם.',
+    about: 'גם זה חשוב. סיפור קצר ואנושי יכול לעזור להבין מי העסק, איך הוא עובד ולמי השירות מתאים.'
+  };
+  $$('[data-next]').forEach(function (choice) {
     choice.addEventListener('click', function () {
-      var key = choice.dataset.order;
-      if (orderChosen.indexOf(key) > -1 || orderChosen.length === 3) return;
-      orderChosen.push(key); choice.disabled = true; renderOrder();
-      var step = orderChosen.length - 1;
-      if (key === orderExpected[step]) {
-        $('#unlock-feedback').textContent = orderChosen.length === 3
-          ? 'SEQUENCE UNLOCKED. מתחילים בהצעת הערך, בונים אמון, ואז מסירים חסמים ליצירת קשר. זו היררכיה שמובילה לפעולה.'
-          : 'נכון. הבלוק הזה יושב במקום ' + (step + 1) + '. מה השלב הבא?';
-      } else {
-        $('#unlock-feedback').textContent = 'אפשר גם כך, אבל חשבו על מסלול הקריאה: קודם להבין מה מקבלים, אחר כך למה להאמין, ורק אז מה לעשות.';
-      }
+      $$('[data-next]').forEach(function (b) { b.setAttribute('aria-pressed', b === choice ? 'true' : 'false'); });
+      $('#next-feedback').textContent = nextCopy[choice.dataset.next];
     });
-  });
-  $('#unlock-reset').addEventListener('click', function () {
-    orderChosen = []; $$('[data-order]').forEach(function (b) { b.disabled = false; }); renderOrder();
-    $('#unlock-feedback').textContent = 'בחרו את הבלוק הראשון.';
   });
 
   // CONTACT: service picks fill the form; submit opens WhatsApp if configured, otherwise an email draft.
