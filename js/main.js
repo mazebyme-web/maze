@@ -53,6 +53,15 @@
         if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true');
       });
       seen[id] = 1;
+      var mapLabels = { entry: '01 / ENTRY', paths: '02 / JUNCTION', archive: '03 / ARCHIVE', fix: '04 / EXPERIMENT', contact: '05 / EXIT' };
+      var mapCurrent = $('#map-current');
+      if (mapCurrent && mapLabels[id]) mapCurrent.textContent = mapLabels[id];
+      $$('[data-map-node]').forEach(function (a) {
+        var nodeId = a.getAttribute('data-map-node');
+        a.classList.toggle('visited', !!seen[nodeId]);
+        if (nodeId === id) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
+      });
       $$('.paths a').forEach(function (a) {
         var destination = a.getAttribute('href').slice(1);
         if (seen[destination] && id !== 'paths') a.classList.add('visited');

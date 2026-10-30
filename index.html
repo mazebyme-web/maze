@@ -23,6 +23,21 @@
     <a class="exit" href="#contact">Exit the maze</a>
   </nav>
 </header>
+<!-- MAZE NAVIGATION MAP: persistent route marker and room shortcuts -->
+<details class="maze-map" id="maze-map">
+  <summary aria-label="Open maze map"><span class="map-word">MAP</span><span class="map-current" id="map-current">01 / ENTRY</span></summary>
+  <nav class="map-panel" aria-label="Maze map">
+    <p class="tech">YOU ARE HERE</p>
+    <ol class="map-route">
+      <li><a href="#entry" data-map-node="entry"><span class="map-node"><i>01</i></span><span>ENTRY</span></a></li>
+      <li><a href="#paths" data-map-node="paths"><span class="map-node"><i>02</i></span><span>JUNCTION</span></a></li>
+      <li><a href="#archive" data-map-node="archive"><span class="map-node"><i>03</i></span><span>ARCHIVE</span></a></li>
+      <li><a href="#fix" data-map-node="fix"><span class="map-node"><i>04</i></span><span>EXPERIMENT</span></a></li>
+      <li><a href="#contact" data-map-node="contact"><span class="map-node"><i>05</i></span><span>EXIT</span></a></li>
+    </ol>
+    <p class="map-note" lang="he" dir="rtl">אפשר לקפוץ לכל חדר שכבר מעניין אתכם.</p>
+  </nav>
+</details>
 <div id="tour" class="tour" hidden><span id="tour-step"></span><button type="button" class="btn" id="tour-back">BACK</button><button type="button" class="btn solid" id="tour-next">NEXT</button><button type="button" class="btn" id="tour-exit">LEAVE TOUR</button></div>
 <main>
 <!-- 1 · ENTRY -->

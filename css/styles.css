@@ -332,3 +332,32 @@ body.touring .foot{padding-bottom:6rem}
   .sample-ad{min-height:14rem}
 }
 @media(prefers-reduced-motion:reduce){.simple-options button,.sample-ad{transition:none}}
+
+
+/* ---- MAZE navigation system / first implementation ---- */
+.maze-map{position:fixed;right:clamp(.75rem,2vw,1.5rem);bottom:clamp(.75rem,2vw,1.5rem);z-index:9;color:var(--ink);font-size:.72rem;letter-spacing:.08em}
+.maze-map summary{list-style:none;display:flex;align-items:center;gap:.7rem;min-height:46px;padding:.55rem .8rem;background:var(--bg);border:1px solid var(--sand);cursor:pointer;box-shadow:0 8px 28px #0005}
+.maze-map summary::-webkit-details-marker{display:none}
+.maze-map summary::before{content:"";width:.55rem;height:.55rem;border:1px solid var(--accent);transform:rotate(45deg);display:block}
+.maze-map[open] summary{border-color:var(--accent)}
+.map-word{font-weight:900;letter-spacing:.16em}
+.map-current{color:var(--sand);border-inline-start:1px solid var(--umber);padding-inline-start:.7rem}
+.map-panel{position:absolute;right:0;bottom:calc(100% + .5rem);width:min(17rem,calc(100vw - 2rem));padding:1rem;background:var(--bg);border:1px solid var(--sand);box-shadow:0 12px 36px #0007}
+.map-panel>.tech{margin-bottom:.9rem;font-size:.62rem}
+.map-route{list-style:none;margin:0;padding:0 0 0 .15rem;display:grid;gap:0}
+.map-route li{position:relative}
+.map-route li:not(:last-child)::after{content:"";position:absolute;left:.8rem;top:1.75rem;height:1.15rem;width:1px;background:var(--umber)}
+.map-route a{display:flex;align-items:center;gap:.8rem;min-height:2.25rem;color:var(--sand);text-decoration:none;transition:color .2s}
+.map-route a:hover,.map-route a[aria-current="location"]{color:var(--ink)}
+.map-node{width:1.65rem;height:1.65rem;display:grid;place-items:center;border:1px solid var(--umber);font-size:.62rem;flex:0 0 auto;transform:rotate(45deg)}
+.map-node i{font-style:normal;transform:rotate(-45deg)}
+.map-route a[aria-current="location"] .map-node{border-color:var(--accent);background:var(--accent);color:var(--ink)}
+.map-route a.visited .map-node{border-color:var(--sand)}
+.map-note{margin:.8rem 0 0;padding-top:.7rem;border-top:1px solid var(--umber);color:var(--sand);font-size:.8rem;letter-spacing:0}
+@media(min-width:600px){.maze-map summary{min-width:10rem;justify-content:space-between}}
+@media(max-width:599px){
+  .maze-map{right:.75rem;bottom:calc(.75rem + env(safe-area-inset-bottom,0px))}
+  .maze-map summary{min-height:44px}
+  .map-panel{max-height:min(65vh,28rem);overflow:auto}
+}
+@media(prefers-reduced-motion:reduce){.map-route a{transition:none}}
