@@ -13,7 +13,7 @@
     var r = rev.getBoundingClientRect(), t = e.touches ? e.touches[0] : e;
     rev.style.setProperty('--x', (t.clientX - r.left) + 'px');
     rev.style.setProperty('--y', (t.clientY - r.top) + 'px');
-    rev.style.setProperty('--r', (innerWidth < 600 ? 150 : 230) + 'px');
+    rev.style.setProperty('--r', (innerWidth < 600 ? 120 : 180) + 'px');
   }
   if (!reduce) {
     ['pointermove', 'touchstart', 'touchmove'].forEach(function (ev) { rev.addEventListener(ev, setPos, { passive: true }); });
