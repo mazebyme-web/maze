@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAZE - Graphic design &amp; branding</title>
+<meta name="description" content="MAZE - independent graphic design and branding practice. עיצוב שמקדם עסקים.">
+<meta name="theme-color" content="#2B2F30">
+<link rel="stylesheet" href="https://use.typekit.net/yet5abx.css">
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/projects.js" defer></script>
+<script src="js/archive.js" defer></script>
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#archive">Skip to the work</a>
+
+<header class="bar">
+  <a href="#entry" aria-label="MAZE - back to top"><img src="assets/logo/maze-offwhite.svg" alt="MAZE" width="120" height="25"></a>
+  <nav aria-label="Main">
+    <a href="#paths">Paths</a>
+    <a href="#archive">Work</a>
+    <a href="#fix">Fix this</a>
+    <a class="exit" href="#contact">Exit the maze</a>
+  </nav>
+</header>
+
+<div id="tour" class="tour" hidden><span id="tour-step"></span><button type="button" class="btn" id="tour-back">BACK</button><button type="button" class="btn solid" id="tour-next">NEXT</button><button type="button" class="btn" id="tour-exit">LEAVE TOUR</button></div>
+<main>
+<!-- 1 · ENTRY -->
+<section id="entry" class="screen" aria-labelledby="h-entry">
+  <div class="tech-row" aria-hidden="true"><span>N° 001</span><span>GRAPHIC DESIGN / BRANDING / WEB</span><span>ISRAEL · 2026</span></div>
+  <p class="kicker">MAZE - graphic design &amp; branding studio</p>
+  <div class="reveal-wrap" id="reveal">
+  <p class="under" aria-hidden="true">BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT BRANDING IDENTITY LOGO TYPE WEB PRINT </p>
+  <h1 id="h-entry" class="big"><span>GOOD</span> <span>DESIGN</span> <span>OPENS</span> <span>DOORS.</span></h1>
+  </div>
+  <p class="he he-left" lang="he" dir="rtl">עיצוב שמקדם עסקים. בואו נגלה איך.</p>
+  <ol class="index-row" aria-hidden="true"><li>01 IDENTITY</li><li>02 DIGITAL</li><li>03 PRINT</li><li>04 EXPERIMENTAL</li></ol>
+  <div class="row">
+    <a class="btn solid" href="#paths">ENTER THE MAZE</a>
+    <a class="btn" href="#archive">SKIP THE INTRO</a>
+  </div>
+  <p class="hint">Move your pointer or touch the headline to reveal what MAZE does. Scroll to continue ↓</p>
+</section>
+
+<!-- 2 · PATHS -->
+<section id="paths" class="screen" aria-labelledby="h-paths">
+  <h2 id="h-paths" class="mid">CHOOSE YOUR PATH</h2>
+  <ul class="paths">
+    <li><a href="#archive"><b>01 SHOW ME</b><span class="he" lang="he" dir="rtl">תראו לי מה MAZE יודעת לעשות.</span></a></li>
+    <li><a href="#fix"><b>02 FIX THIS</b><span class="he" lang="he" dir="rtl">בואו נראה מה עיצוב יכול לשנות.</span></a></li>
+    <li><a href="#contact"><b>03 LET’S TALK</b><span class="he" lang="he" dir="rtl">יש לכם פרויקט? דברו איתי.</span></a></li>
+  </ul>
+  <div class="row">
+    <button type="button" class="btn solid" data-tour="start">FOLLOW THE PATH</button>
+    <a class="btn" href="#archive">EXPLORE FREELY</a>
+  </div>
+</section>
+
+<!-- 3 · ARCHIVE -->
+<section id="archive" class="screen" aria-labelledby="h-archive">
+  <div class="arch-head">
+    <h2 id="h-archive" class="mid">THE PROJECT ARCHIVE</h2>
+    <p class="tech" id="arch-count" role="status"></p>
+  </div>
+  <div class="filters" role="group" aria-label="Filter projects">
+    <button type="button" data-f="all" aria-pressed="true">ALL FILES</button>
+    <button type="button" data-f="identity" aria-pressed="false">IDENTITY</button>
+    <button type="button" data-f="digital" aria-pressed="false">DIGITAL</button>
+    <button type="button" data-f="print" aria-pressed="false">PRINT</button>
+    <button type="button" data-f="experimental" aria-pressed="false">EXPERIMENTAL</button>
+    <button type="button" class="rearr" id="rearrange" aria-pressed="false">REARRANGE</button>
+  </div>
+  <ul id="grid" class="grid"></ul>
+  <p id="arch-empty" class="note" hidden>No files in this category yet. <button type="button" class="lnk" data-f="all">Back to ALL FILES</button></p>
+</section>
+
+<!-- 4 · CASE FILE (overlay) -->
+<div id="case" class="case" role="dialog" aria-modal="true" aria-labelledby="h-case" hidden>
+  <div class="case-in">
+    <button type="button" class="btn close" data-close>BACK TO ARCHIVE</button>
+    <h2 id="h-case" class="mid">THE CASE FILE</h2>
+    <div id="case-body"></div>
+  </div>
+</div>
+
+<!-- 5 · FIX THIS -->
+<section id="fix" class="screen" aria-labelledby="h-fix">
+  <h2 id="h-fix" class="mid">FIX THIS</h2>
+  <p class="note">Conceptual demonstration. The business is invented and no result is implied.</p>
+  <p class="he he-left" lang="he" dir="rtl">אותו תוכן בדיוק, לפני ואחרי. גררו את הסרגל, ולחצו על הנקודות כדי להבין כל החלטה.</p>
+  <div class="cmp" id="cmpbox" dir="ltr">
+    <div class="layer before" lang="he" dir="rtl" aria-hidden="true">
+      <i class="b1">קרמיקה נועה</i><i class="b2">סדנאות!!! חוגים! מתנות!</i><i class="b3">הרצל 12, חיפה</i><i class="b4">050-0000000</i><i class="b5"><bdi>@noa.ceramics</bdi></i>
+    </div>
+    <div class="layer after" lang="he" dir="rtl">
+      <strong>קרמיקה נועה</strong><span>סדנאות וחוגים בחיפה</span>
+      <ul><li>הרצל 12, חיפה</li><li>050-0000000</li><li><bdi>@noa.ceramics</bdi></li></ul>
+      <u>להרשמה</u>
+    </div>
+    <span class="gridlines" aria-hidden="true"></span><span class="handle" aria-hidden="true"></span>
+    <button type="button" class="pin" data-pin="1" style="--px:9%;--py:24%" aria-label="Note 1: hierarchy" aria-pressed="false">1</button>
+    <button type="button" class="pin" data-pin="2" style="--px:9%;--py:58%" aria-label="Note 2: alignment" aria-pressed="false">2</button>
+    <button type="button" class="pin" data-pin="3" style="--px:9%;--py:88%" aria-label="Note 3: contrast" aria-pressed="false">3</button>
+  </div>
+  <div class="cmp-ctrl" dir="ltr"><span class="tech">BEFORE</span><input type="range" id="cmp" min="0" max="100" value="50" aria-label="Compare before and after"><span class="tech">AFTER</span></div>
+  <label class="gl"><input type="checkbox" id="gl"> SHOW ALIGNMENT GRID</label>
+  <p id="fix-out" class="he he-left" lang="he" dir="rtl" role="status">לחצו על אחת הנקודות המסומנות.</p>
+  <a class="btn" href="#contact">SKIP TO CONTACT</a>
+</section>
+
+<!-- 6 · EXIT -->
+<section id="contact" class="screen" aria-labelledby="h-contact">
+  <div class="c-grid">
+    <div class="c-main">
+      <h2 id="h-contact" class="big">YOUR BUSINESS IS NEXT.</h2>
+      <p class="he he-left" lang="he" dir="rtl">מה העסק שלכם צריך?</p>
+      <ol class="svc" lang="he" dir="rtl" aria-label="בחירת שירות">
+        <li><button type="button" data-svc="מיתוג וזהות חזותית"><i>01</i>מיתוג וזהות חזותית</button></li>
+        <li><button type="button" data-svc="עיצוב דיגיטלי"><i>02</i>עיצוב דיגיטלי</button></li>
+        <li><button type="button" data-svc="עמודי נחיתה"><i>03</i>עמודי נחיתה</button></li>
+        <li><button type="button" data-svc="פרויקטים גרפיים נקודתיים"><i>04</i>פרויקטים גרפיים נקודתיים</button></li>
+        <li><button type="button" data-svc="ייעוץ או התלבטות לגבי הצורך העיצובי"><i>05</i>ייעוץ או התלבטות לגבי הצורך העיצובי</button></li>
+      </ol>
+    </div>
+    <form id="cform" class="cform" lang="he" dir="rtl" novalidate>
+      <p class="tech" dir="ltr" lang="en">SEND A MESSAGE</p>
+      <label>שם<input name="name" autocomplete="name" required></label>
+      <label>טלפון או מייל<input name="contact" autocomplete="email" required></label>
+      <label>ספרו בקצרה על הפרויקט<textarea name="msg" rows="5" required></textarea></label>
+      <button type="submit" class="btn solid" id="send">שליחה</button>
+      <p id="wa-note" class="tech" role="status" dir="ltr" lang="en">Choose a service or write your own message.</p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <img src="assets/logo/maze-sand.svg" alt="MAZE" width="96" height="20">
+  <nav aria-label="Contact and legal">
+    <a href="mailto:mazebyme@gmail.com">mazebyme@gmail.com</a>
+    <a href="https://instagram.com/bymazedesign" rel="noopener">Instagram</a>
+    <a href="#" id="f-wa" hidden>WhatsApp</a>
+    <a href="privacy.html" lang="he">מדיניות פרטיות</a>
+    <a href="accessibility.html" lang="he">הצהרת נגישות</a>
+  </nav>
+  <p class="tech">© 2026 MAZE</p>
+</footer>
+</body>
+</html>
