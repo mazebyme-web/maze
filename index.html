@@ -14,7 +14,6 @@
 </head>
 <body>
 <a class="skip" href="#archive">Skip to the work</a>
-
 <header class="bar">
   <a href="#entry" aria-label="MAZE - back to top"><img src="assets/logo/maze-offwhite.svg" alt="MAZE" width="120" height="25"></a>
   <nav aria-label="Main">
@@ -24,7 +23,6 @@
     <a class="exit" href="#contact">Exit the maze</a>
   </nav>
 </header>
-
 <div id="tour" class="tour" hidden><span id="tour-step"></span><button type="button" class="btn" id="tour-back">BACK</button><button type="button" class="btn solid" id="tour-next">NEXT</button><button type="button" class="btn" id="tour-exit">LEAVE TOUR</button></div>
 <main>
 <!-- 1 · ENTRY -->
@@ -43,8 +41,7 @@
   </div>
   <p class="hint">Move your pointer or touch the headline to reveal what MAZE does. Scroll to continue ↓</p>
 </section>
-
-<!-- 2 · PATHS -->
+<!-- 2 · PATHS (intentionally unchanged) -->
 <section id="paths" class="screen" aria-labelledby="h-paths">
   <h2 id="h-paths" class="mid">CHOOSE YOUR PATH</h2>
   <ul class="paths">
@@ -57,8 +54,7 @@
     <a class="btn" href="#archive">EXPLORE FREELY</a>
   </div>
 </section>
-
-<!-- 3 · ARCHIVE -->
+<!-- 3 · ARCHIVE (visual structure intentionally unchanged) -->
 <section id="archive" class="screen" aria-labelledby="h-archive">
   <div class="arch-head">
     <h2 id="h-archive" class="mid">THE PROJECT ARCHIVE</h2>
@@ -75,7 +71,6 @@
   <ul id="grid" class="grid"></ul>
   <p id="arch-empty" class="note" hidden>No files in this category yet. <button type="button" class="lnk" data-f="all">Back to ALL FILES</button></p>
 </section>
-
 <!-- 4 · CASE FILE (overlay) -->
 <div id="case" class="case" role="dialog" aria-modal="true" aria-labelledby="h-case" hidden>
   <div class="case-in">
@@ -84,7 +79,6 @@
     <div id="case-body"></div>
   </div>
 </div>
-
 <!-- 5 · FIX THIS -->
 <section id="fix" class="screen" aria-labelledby="h-fix">
   <h2 id="h-fix" class="mid">FIX THIS</h2>
@@ -107,14 +101,77 @@
   <div class="cmp-ctrl" dir="ltr"><span class="tech">BEFORE</span><input type="range" id="cmp" min="0" max="100" value="50" aria-label="Compare before and after"><span class="tech">AFTER</span></div>
   <label class="gl"><input type="checkbox" id="gl"> SHOW ALIGNMENT GRID</label>
   <p id="fix-out" class="he he-left" lang="he" dir="rtl" role="status">לחצו על אחת הנקודות המסומנות.</p>
+
+  <!-- MAZE mini challenges -->
+  <div class="game-hub" id="game-hub">
+    <div class="game-intro">
+      <p class="tech">INTERACTIVE DETOUR / 001—003</p>
+      <h3>DON’T JUST LOOK. FIGURE IT OUT.</h3>
+      <p lang="he" dir="rtl">שלושה אתגרים קצרים. בלי ניקוד על טעם — רק קצת חשיבה עיצובית.</p>
+    </div>
+    <div class="game-tabs" role="group" aria-label="Choose a challenge">
+      <button type="button" data-game="spot" aria-pressed="true"><span>01</span> SPOT THE PROBLEM</button>
+      <button type="button" data-game="call" aria-pressed="false"><span>02</span> MAKE THE CALL</button>
+      <button type="button" data-game="unlock" aria-pressed="false"><span>03</span> UNLOCK THE DESIGN</button>
+    </div>
+
+    <section class="game-panel" data-panel="spot" aria-labelledby="spot-title">
+      <div class="game-panel-head"><p class="tech">CASE 001 / VISUAL INVESTIGATION</p><span class="game-count" id="spot-count">0 / 3 CLUES</span></div>
+      <h4 id="spot-title">Something is off. Find all three.</h4>
+      <p class="game-copy" lang="he" dir="rtl">במודעה הפיקטיבית הזאת מסתתרות שלוש בעיות. לחצו על האזורים החשודים כדי לחשוף אותן.</p>
+      <div class="spot-board" id="spot-board" lang="he" dir="rtl">
+        <div class="spot-ad-top"><span>סטודיו תמר</span><small>ההרשמה פתוחה</small></div>
+        <div class="spot-ad-middle"><strong>הכל. לכולם. עכשיו!!!</strong><p>סדנאות יצירה לכל הגילאים</p></div>
+        <div class="spot-ad-bottom"><span>יום שלישי | 18:00</span><b>פרטים והרשמה</b><small>רח׳ הגפן 12 · 050-1234567</small></div>
+        <button type="button" class="spot-target target-one" data-spot="1" aria-label="בדיקת אזור הכותרת">01</button>
+        <button type="button" class="spot-target target-two" data-spot="2" aria-label="בדיקת אזור הפרטים">02</button>
+        <button type="button" class="spot-target target-three" data-spot="3" aria-label="בדיקת אזור הפעולה">03</button>
+      </div>
+      <p class="game-feedback" id="spot-feedback" role="status" aria-live="polite" lang="he" dir="rtl">רמז: חפשו היררכיה, קריאות ופעולה ברורה.</p>
+      <button type="button" class="game-reset" id="spot-reset">RESET INVESTIGATION ↻</button>
+    </section>
+
+    <section class="game-panel" data-panel="call" aria-labelledby="call-title" hidden>
+      <div class="game-panel-head"><p class="tech">CASE 002 / CREATIVE DECISION</p><span class="game-count">NO PERFECT ANSWER</span></div>
+      <h4 id="call-title">The client says: “Make it pop.”</h4>
+      <p class="game-copy" lang="he" dir="rtl">לקוח מבקש להבליט את כל האלמנטים במודעה. מה השאלה הראשונה שכדאי לשאול?</p>
+      <div class="call-options" role="group" aria-label="Choose your response">
+        <button type="button" data-call="a"><span>A</span><strong>“איזה צבע הכי חזק?”</strong><small>מתחילים מהצבע</small></button>
+        <button type="button" data-call="b"><span>B</span><strong>“מה הדבר האחד שהקהל חייב להבין?”</strong><small>מתחילים מהמטרה</small></button>
+      </div>
+      <p class="game-feedback" id="call-feedback" role="status" aria-live="polite" lang="he" dir="rtl">בחרו תשובה כדי לפתוח את ההסבר.</p>
+      <button type="button" class="game-reset" id="call-reset">TRY AGAIN ↻</button>
+    </section>
+
+    <section class="game-panel" data-panel="unlock" aria-labelledby="unlock-title" hidden>
+      <div class="game-panel-head"><p class="tech">CASE 003 / INFORMATION ARCHITECTURE</p><span class="game-count" id="unlock-count">0 / 3 PLACED</span></div>
+      <h4 id="unlock-title">Unlock the design.</h4>
+      <p class="game-copy" lang="he" dir="rtl">יש לכם שלושה פרטי מידע. בחרו אותם לפי הסדר שבו לקוח חדש צריך לפגוש אותם: מה העסק מציע, למה לבחור בו, ואיך יוצרים קשר.</p>
+      <div class="unlock-options" role="group" aria-label="Choose the next information block">
+        <button type="button" data-order="offer"><span>01</span><strong>מה העסק מציע?</strong></button>
+        <button type="button" data-order="proof"><span>02</span><strong>למה לסמוך עליו?</strong></button>
+        <button type="button" data-order="action"><span>03</span><strong>איך מתקדמים?</strong></button>
+      </div>
+      <ol class="unlock-sequence" id="unlock-sequence" aria-label="Your chosen order"></ol>
+      <p class="game-feedback" id="unlock-feedback" role="status" aria-live="polite" lang="he" dir="rtl">בחרו את הבלוק הראשון.</p>
+      <button type="button" class="game-reset" id="unlock-reset">START OVER ↻</button>
+    </section>
+  </div>
   <a class="btn" href="#contact">SKIP TO CONTACT</a>
 </section>
-
 <!-- 6 · EXIT -->
 <section id="contact" class="screen" aria-labelledby="h-contact">
+  <h2 id="h-contact" class="big">YOUR BUSINESS IS NEXT.</h2>
   <div class="c-grid">
+    <form id="cform" class="cform" lang="he" dir="rtl" novalidate>
+      <p class="tech" dir="ltr" lang="en">SEND A MESSAGE</p>
+      <label>שם<input name="name" autocomplete="name" required></label>
+      <label>טלפון או מייל<input name="contact" autocomplete="email" required></label>
+      <label>ספרו בקצרה על הפרויקט<textarea name="msg" rows="5" required></textarea></label>
+      <button type="submit" class="btn solid" id="send">שליחה</button>
+      <p id="wa-note" class="tech" role="status" dir="ltr" lang="en">Choose a service or write your own message.</p>
+    </form>
     <div class="c-main">
-      <h2 id="h-contact" class="big">YOUR BUSINESS IS NEXT.</h2>
       <p class="he he-left" lang="he" dir="rtl">מה העסק שלכם צריך?</p>
       <ol class="svc" lang="he" dir="rtl" aria-label="בחירת שירות">
         <li><button type="button" data-svc="מיתוג וזהות חזותית"><i>01</i>מיתוג וזהות חזותית</button></li>
@@ -124,14 +181,6 @@
         <li><button type="button" data-svc="ייעוץ או התלבטות לגבי הצורך העיצובי"><i>05</i>ייעוץ או התלבטות לגבי הצורך העיצובי</button></li>
       </ol>
     </div>
-    <form id="cform" class="cform" lang="he" dir="rtl" novalidate>
-      <p class="tech" dir="ltr" lang="en">SEND A MESSAGE</p>
-      <label>שם<input name="name" autocomplete="name" required></label>
-      <label>טלפון או מייל<input name="contact" autocomplete="email" required></label>
-      <label>ספרו בקצרה על הפרויקט<textarea name="msg" rows="5" required></textarea></label>
-      <button type="submit" class="btn solid" id="send">שליחה</button>
-      <p id="wa-note" class="tech" role="status" dir="ltr" lang="en">Choose a service or write your own message.</p>
-    </form>
   </div>
 </section>
 </main>
