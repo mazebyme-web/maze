@@ -8,12 +8,14 @@
 <meta name="theme-color" content="#2B2F30">
 <link rel="stylesheet" href="https://use.typekit.net/yet5abx.css">
 <link rel="stylesheet" href="css/styles.css">
+<script src="js/nav.js" defer></script>
 <script src="js/projects.js" defer></script>
 <script src="js/archive.js" defer></script>
 <script src="js/main.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#archive">Skip to the work</a>
+
 <header class="bar">
   <a href="#entry" aria-label="MAZE - back to top"><img src="assets/logo/maze-offwhite.svg" alt="MAZE" width="120" height="25"></a>
   <nav aria-label="Main">
@@ -23,23 +25,15 @@
     <a class="exit" href="#contact">Exit the maze</a>
   </nav>
 </header>
-<!-- MAZE NAVIGATION MAP: persistent route marker and room shortcuts -->
-<details class="maze-map" id="maze-map">
-  <summary aria-label="Open maze map"><span class="map-word">MAP</span><span class="map-current" id="map-current">01 / ENTRY</span></summary>
-  <nav class="map-panel" aria-label="Maze map">
-    <p class="tech">YOU ARE HERE</p>
-    <ol class="map-route">
-      <li><a href="#entry" data-map-node="entry"><span class="map-node"><i>01</i></span><span>ENTRY</span></a></li>
-      <li><a href="#paths" data-map-node="paths"><span class="map-node"><i>02</i></span><span>JUNCTION</span></a></li>
-      <li><a href="#archive" data-map-node="archive"><span class="map-node"><i>03</i></span><span>ARCHIVE</span></a></li>
-      <li><a href="#fix" data-map-node="fix"><span class="map-node"><i>04</i></span><span>EXPERIMENT</span></a></li>
-      <li><a href="#contact" data-map-node="contact"><span class="map-node"><i>05</i></span><span>EXIT</span></a></li>
-    </ol>
-    <p class="map-note" lang="he" dir="rtl">אפשר לקפוץ לכל חדר שכבר מעניין אתכם.</p>
-  </nav>
-</details>
+
+<nav id="dock" class="dock" aria-label="Exits from this room"></nav>
+<aside id="map" class="map" aria-label="Maze map" hidden>
+  <button type="button" id="map-toggle" class="map-toggle" aria-expanded="false" aria-controls="map-panel">MAP</button>
+  <div id="map-panel" class="map-panel"><svg id="map-svg" aria-hidden="true"></svg><i class="you" id="you" aria-hidden="true"></i></div>
+  <p class="sr" id="map-live" aria-live="polite"></p>
+</aside>
 <div id="tour" class="tour" hidden><span id="tour-step"></span><button type="button" class="btn" id="tour-back">BACK</button><button type="button" class="btn solid" id="tour-next">NEXT</button><button type="button" class="btn" id="tour-exit">LEAVE TOUR</button></div>
-<main>
+<main id="world"><div id="stage">
 <!-- 1 · ENTRY -->
 <section id="entry" class="screen" aria-labelledby="h-entry">
   <div class="tech-row" aria-hidden="true"><span>N° 001</span><span>GRAPHIC DESIGN / BRANDING / WEB</span><span>ISRAEL · 2026</span></div>
@@ -54,9 +48,10 @@
     <a class="btn solid" href="#paths">ENTER THE MAZE</a>
     <a class="btn" href="#archive">SKIP THE INTRO</a>
   </div>
-  <p class="hint">Move your pointer or touch the headline to reveal what MAZE does. Scroll to continue ↓</p>
+  <p class="hint">Move your pointer or touch the headline to reveal what MAZE does. Scroll or swipe up to step into the maze ↓</p>
 </section>
-<!-- 2 · PATHS (intentionally unchanged) -->
+
+<!-- 2 · PATHS -->
 <section id="paths" class="screen" aria-labelledby="h-paths">
   <h2 id="h-paths" class="mid">CHOOSE YOUR PATH</h2>
   <ul class="paths">
@@ -69,7 +64,8 @@
     <a class="btn" href="#archive">EXPLORE FREELY</a>
   </div>
 </section>
-<!-- 3 · ARCHIVE (visual structure intentionally unchanged) -->
+
+<!-- 3 · ARCHIVE -->
 <section id="archive" class="screen" aria-labelledby="h-archive">
   <div class="arch-head">
     <h2 id="h-archive" class="mid">THE PROJECT ARCHIVE</h2>
@@ -86,6 +82,7 @@
   <ul id="grid" class="grid"></ul>
   <p id="arch-empty" class="note" hidden>No files in this category yet. <button type="button" class="lnk" data-f="all">Back to ALL FILES</button></p>
 </section>
+
 <!-- 4 · CASE FILE (overlay) -->
 <div id="case" class="case" role="dialog" aria-modal="true" aria-labelledby="h-case" hidden>
   <div class="case-in">
@@ -94,6 +91,7 @@
     <div id="case-body"></div>
   </div>
 </div>
+
 <!-- 5 · FIX THIS -->
 <section id="fix" class="screen" aria-labelledby="h-fix">
   <h2 id="h-fix" class="mid">FIX THIS</h2>
@@ -116,74 +114,14 @@
   <div class="cmp-ctrl" dir="ltr"><span class="tech">BEFORE</span><input type="range" id="cmp" min="0" max="100" value="50" aria-label="Compare before and after"><span class="tech">AFTER</span></div>
   <label class="gl"><input type="checkbox" id="gl"> SHOW ALIGNMENT GRID</label>
   <p id="fix-out" class="he he-left" lang="he" dir="rtl" role="status">לחצו על אחת הנקודות המסומנות.</p>
-
-  <!-- MAZE mini challenges: everyday customer decisions -->
-  <div class="game-hub" id="game-hub">
-    <div class="game-intro">
-      <p class="tech">A QUICK DETOUR / 001—003</p>
-      <h3>TAKE A SECOND LOOK.</h3>
-      <p lang="he" dir="rtl">לא צריך להבין בעיצוב. רק להיכנס לרגע לנעליים של הלקוחות שלכם.</p>
-    </div>
-    <div class="game-tabs" role="group" aria-label="בחירת משחק">
-      <button type="button" data-game="need" aria-pressed="true"><span>01</span> מה חשוב ללקוח?</button>
-      <button type="button" data-game="ad" aria-pressed="false"><span>02</span> על איזו מודעה תלחצו?</button>
-      <button type="button" data-game="next" aria-pressed="false"><span>03</span> מה עושים עכשיו?</button>
-    </div>
-
-    <section class="game-panel" data-panel="need" aria-labelledby="need-title">
-      <div class="game-panel-head"><p class="tech">01 / GET TO KNOW YOUR CUSTOMER</p><span class="game-count">בחירה אחת</span></div>
-      <h4 id="need-title" lang="he" dir="rtl">נכנסתם לעמוד של עסק חדש. מה תחפשו קודם?</h4>
-      <p class="game-copy" lang="he" dir="rtl">דמיינו שאתם מחפשים בעל מקצוע או שירות. מה יעזור לכם להחליט אם להמשיך?</p>
-      <div class="simple-options" role="group" aria-label="מה חשוב לכם לדעת?">
-        <button type="button" data-need="service"><span>01</span><strong>מה בדיוק אפשר לקבל כאן?</strong></button>
-        <button type="button" data-need="price"><span>02</span><strong>כמה זה עולה?</strong></button>
-        <button type="button" data-need="trust"><span>03</span><strong>מי עומד מאחורי העסק?</strong></button>
-      </div>
-      <p class="game-feedback" id="need-feedback" role="status" aria-live="polite" lang="he" dir="rtl">אין תשובה לא נכונה. בחרו את מה שהכי חשוב לכם.</p>
-    </section>
-
-    <section class="game-panel" data-panel="ad" aria-labelledby="ad-title" hidden>
-      <div class="game-panel-head"><p class="tech">02 / FIRST IMPRESSION</p><span class="game-count">איזו מודעה ברורה יותר?</span></div>
-      <h4 id="ad-title" lang="he" dir="rtl">אתם מחפשים סדנת קרמיקה. איזו מודעה תגרום לכם לעצור?</h4>
-      <p class="game-copy" lang="he" dir="rtl">שתיהן מציעות את אותו הדבר. בחרו את המודעה שהייתם מבינים מהר יותר.</p>
-      <div class="ad-choices" role="group" aria-label="בחירת מודעה">
-        <button type="button" data-ad="a" class="sample-ad sample-ad-a" lang="he" dir="rtl">
-          <span class="sample-tag">סטודיו תמר</span><strong>יצירה. חוויה. השראה.</strong><span>סדנאות · חוגים · מתנות · אירועים</span><b>לפרטים והרשמה</b>
-        </button>
-        <button type="button" data-ad="b" class="sample-ad sample-ad-b" lang="he" dir="rtl">
-          <span class="sample-tag">סטודיו תמר</span><strong>בואו ליצור<br>כלי קרמיקה משלכם</strong><span>סדנה למתחילים | יום חמישי 18:00</span><b>לשמירת מקום</b>
-        </button>
-      </div>
-      <p class="game-feedback" id="ad-feedback" role="status" aria-live="polite" lang="he" dir="rtl">בחרו את המודעה שהייתם לוחצים עליה.</p>
-    </section>
-
-    <section class="game-panel" data-panel="next" aria-labelledby="next-title" hidden>
-      <div class="game-panel-head"><p class="tech">03 / MAKE IT EASY</p><span class="game-count">צעד אחד קטן</span></div>
-      <h4 id="next-title" lang="he" dir="rtl">מצאתם עסק שמעניין אתכם. מה תרצו לעשות?</h4>
-      <p class="game-copy" lang="he" dir="rtl">בחרו מה הייתם מצפים למצוא בעמוד של העסק.</p>
-      <div class="simple-options" role="group" aria-label="מה תרצו לעשות?">
-        <button type="button" data-next="contact"><span>01</span><strong>לשאול שאלה או לקבוע שיחה</strong></button>
-        <button type="button" data-next="more"><span>02</span><strong>לראות עוד דוגמאות לעבודות</strong></button>
-        <button type="button" data-next="about"><span>03</span><strong>לקרוא עוד על העסק</strong></button>
-      </div>
-      <p class="game-feedback" id="next-feedback" role="status" aria-live="polite" lang="he" dir="rtl">בחרו את הצעד שהכי טבעי לכם.</p>
-    </section>
-  </div>
   <a class="btn" href="#contact">SKIP TO CONTACT</a>
 </section>
+
 <!-- 6 · EXIT -->
 <section id="contact" class="screen" aria-labelledby="h-contact">
-  <h2 id="h-contact" class="big">YOUR BUSINESS IS NEXT.</h2>
   <div class="c-grid">
-    <form id="cform" class="cform" lang="he" dir="rtl" novalidate>
-      <p class="tech" dir="ltr" lang="en">SEND A MESSAGE</p>
-      <label>שם<input name="name" autocomplete="name" required></label>
-      <label>טלפון או מייל<input name="contact" autocomplete="email" required></label>
-      <label>ספרו בקצרה על הפרויקט<textarea name="msg" rows="5" required></textarea></label>
-      <button type="submit" class="btn solid" id="send">שליחה</button>
-      <p id="wa-note" class="tech" role="status" dir="ltr" lang="en">Choose a service or write your own message.</p>
-    </form>
     <div class="c-main">
+      <h2 id="h-contact" class="big">YOUR BUSINESS IS NEXT.</h2>
       <p class="he he-left" lang="he" dir="rtl">מה העסק שלכם צריך?</p>
       <ol class="svc" lang="he" dir="rtl" aria-label="בחירת שירות">
         <li><button type="button" data-svc="מיתוג וזהות חזותית"><i>01</i>מיתוג וזהות חזותית</button></li>
@@ -193,9 +131,15 @@
         <li><button type="button" data-svc="ייעוץ או התלבטות לגבי הצורך העיצובי"><i>05</i>ייעוץ או התלבטות לגבי הצורך העיצובי</button></li>
       </ol>
     </div>
+    <form id="cform" class="cform" lang="he" dir="rtl" novalidate>
+      <p class="tech" dir="ltr" lang="en">SEND A MESSAGE</p>
+      <label>שם<input name="name" autocomplete="name" required></label>
+      <label>טלפון או מייל<input name="contact" autocomplete="email" required></label>
+      <label>ספרו בקצרה על הפרויקט<textarea name="msg" rows="5" required></textarea></label>
+      <button type="submit" class="btn solid" id="send">שליחה</button>
+      <p id="wa-note" class="tech" role="status" dir="ltr" lang="en">Choose a service or write your own message.</p>
+    </form>
   </div>
-</section>
-</main>
 <footer class="foot">
   <img src="assets/logo/maze-sand.svg" alt="MAZE" width="96" height="20">
   <nav aria-label="Contact and legal">
@@ -207,5 +151,8 @@
   </nav>
   <p class="tech">© 2026 MAZE</p>
 </footer>
+</section>
+</div></main>
+
 </body>
 </html>
