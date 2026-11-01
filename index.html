@@ -8,9 +8,11 @@
 <meta name="theme-color" content="#2B2F30">
 <link rel="stylesheet" href="https://use.typekit.net/yet5abx.css">
 <link rel="stylesheet" href="css/styles.css">
-<script src="js/nav.js" defer></script>
+<link rel="stylesheet" href="css/fixthis.css">
 <script src="js/projects.js" defer></script>
 <script src="js/archive.js" defer></script>
+<script src="js/fixthis-config.js" defer></script>
+<script src="js/fixthis.js" defer></script>
 <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -26,14 +28,8 @@
   </nav>
 </header>
 
-<nav id="dock" class="dock" aria-label="Exits from this room"></nav>
-<aside id="map" class="map" aria-label="Maze map" hidden>
-  <button type="button" id="map-toggle" class="map-toggle" aria-expanded="false" aria-controls="map-panel">MAP</button>
-  <div id="map-panel" class="map-panel"><svg id="map-svg" aria-hidden="true"></svg><i class="you" id="you" aria-hidden="true"></i></div>
-  <p class="sr" id="map-live" aria-live="polite"></p>
-</aside>
 <div id="tour" class="tour" hidden><span id="tour-step"></span><button type="button" class="btn" id="tour-back">BACK</button><button type="button" class="btn solid" id="tour-next">NEXT</button><button type="button" class="btn" id="tour-exit">LEAVE TOUR</button></div>
-<main id="world"><div id="stage">
+<main>
 <!-- 1 · ENTRY -->
 <section id="entry" class="screen" aria-labelledby="h-entry">
   <div class="tech-row" aria-hidden="true"><span>N° 001</span><span>GRAPHIC DESIGN / BRANDING / WEB</span><span>ISRAEL · 2026</span></div>
@@ -48,7 +44,7 @@
     <a class="btn solid" href="#paths">ENTER THE MAZE</a>
     <a class="btn" href="#archive">SKIP THE INTRO</a>
   </div>
-  <p class="hint">Move your pointer or touch the headline to reveal what MAZE does. Scroll or swipe up to step into the maze ↓</p>
+  <p class="hint">Move your pointer or touch the headline to reveal what MAZE does. Scroll to continue ↓</p>
 </section>
 
 <!-- 2 · PATHS -->
@@ -93,28 +89,59 @@
 </div>
 
 <!-- 5 · FIX THIS -->
-<section id="fix" class="screen" aria-labelledby="h-fix">
-  <h2 id="h-fix" class="mid">FIX THIS</h2>
-  <p class="note">Conceptual demonstration. The business is invented and no result is implied.</p>
-  <p class="he he-left" lang="he" dir="rtl">אותו תוכן בדיוק, לפני ואחרי. גררו את הסרגל, ולחצו על הנקודות כדי להבין כל החלטה.</p>
-  <div class="cmp" id="cmpbox" dir="ltr">
-    <div class="layer before" lang="he" dir="rtl" aria-hidden="true">
-      <i class="b1">קרמיקה נועה</i><i class="b2">סדנאות!!! חוגים! מתנות!</i><i class="b3">הרצל 12, חיפה</i><i class="b4">050-0000000</i><i class="b5"><bdi>@noa.ceramics</bdi></i>
-    </div>
-    <div class="layer after" lang="he" dir="rtl">
-      <strong>קרמיקה נועה</strong><span>סדנאות וחוגים בחיפה</span>
-      <ul><li>הרצל 12, חיפה</li><li>050-0000000</li><li><bdi>@noa.ceramics</bdi></li></ul>
-      <u>להרשמה</u>
-    </div>
-    <span class="gridlines" aria-hidden="true"></span><span class="handle" aria-hidden="true"></span>
-    <button type="button" class="pin" data-pin="1" style="--px:9%;--py:24%" aria-label="Note 1: hierarchy" aria-pressed="false">1</button>
-    <button type="button" class="pin" data-pin="2" style="--px:9%;--py:58%" aria-label="Note 2: alignment" aria-pressed="false">2</button>
-    <button type="button" class="pin" data-pin="3" style="--px:9%;--py:88%" aria-label="Note 3: contrast" aria-pressed="false">3</button>
+<section id="fix" class="screen fx" aria-labelledby="h-fix">
+  <div class="fx-top">
+    <h2 id="h-fix" class="tech">FIX THIS</h2>
+    <p class="tech" id="fx-count" hidden></p>
+    <button type="button" class="fx-skip" id="fx-skip">SKIP ›</button>
   </div>
-  <div class="cmp-ctrl" dir="ltr"><span class="tech">BEFORE</span><input type="range" id="cmp" min="0" max="100" value="50" aria-label="Compare before and after"><span class="tech">AFTER</span></div>
-  <label class="gl"><input type="checkbox" id="gl"> SHOW ALIGNMENT GRID</label>
-  <p id="fix-out" class="he he-left" lang="he" dir="rtl" role="status">לחצו על אחת הנקודות המסומנות.</p>
-  <a class="btn" href="#contact">SKIP TO CONTACT</a>
+
+  <div class="fx-panel" data-step="intro">
+    <h3 class="fx-big" data-focus tabindex="-1">FIX THIS.</h3>
+    <p class="fx-sub">A little design test.<br>No design skills required.</p>
+    <div class="row"><button type="button" class="btn solid" data-go="c1">LET’S PLAY</button><a class="btn" href="#archive">SKIP TO THE WORK</a></div>
+  </div>
+
+  <div class="fx-panel" data-step="c1" hidden>
+    <h3 class="fx-q" data-focus tabindex="-1">Which one would make you stop scrolling?</h3>
+    <div class="fx-pair" role="group" aria-label="Choose one design">
+      <button type="button" class="fx-art" data-pick="a" aria-pressed="false"><span class="fx-img" data-slot="c1a"></span><span class="fx-tag">A</span></button>
+      <button type="button" class="fx-art" data-pick="b" aria-pressed="false"><span class="fx-img" data-slot="c1b"></span><span class="fx-tag">B</span></button>
+    </div>
+    <div class="fx-reveal" role="status" hidden>
+      <p class="fx-quote"></p>
+      <p class="fx-why he-left" lang="he" dir="rtl"></p>
+      <div class="row"><button type="button" class="btn solid fx-next" data-go="c2">NEXT CHALLENGE</button><button type="button" class="btn" data-go="end">FINISH</button></div>
+    </div>
+  </div>
+
+  <div class="fx-panel" data-step="c2" hidden>
+    <h3 class="fx-q" data-focus tabindex="-1">Something’s missing. Can you spot it?</h3>
+    <div class="fx-c2"><span class="fx-img" data-slot="c2"></span><ul class="fx-opts" aria-label="What is missing?"></ul></div>
+    <div class="fx-reveal" role="status" hidden>
+      <p class="fx-why he-left" lang="he" dir="rtl"></p>
+      <div class="row"><button type="button" class="btn solid fx-next" data-go="c3">THE REVEAL</button><button type="button" class="btn" data-go="end">FINISH</button></div>
+    </div>
+  </div>
+
+  <div class="fx-panel" data-step="c3" hidden>
+    <h3 class="fx-q" data-focus tabindex="-1">Same business. Different impression.</h3>
+    <div class="fx-cmp" dir="ltr" style="--p:50%">
+      <span class="fx-img fx-layer" data-slot="c3b"></span>
+      <span class="fx-img fx-layer fx-top-layer" data-slot="c3a"></span>
+      <span class="fx-handle" aria-hidden="true"></span>
+    </div>
+    <div class="fx-cmp-ctrl" dir="ltr"><span class="tech">BEFORE</span><input type="range" id="fx-range" min="0" max="100" value="50" aria-label="Drag to compare before and after"><span class="tech">AFTER</span></div>
+    <div class="fx-tog" role="group" aria-label="Show before or after" hidden><button type="button" data-tg="before" aria-pressed="true">BEFORE</button><button type="button" data-tg="after" aria-pressed="false">AFTER</button></div>
+    <p class="fx-sub">That’s what thoughtful design can change.</p>
+    <div class="row"><button type="button" class="btn solid" data-go="end">FINISH</button></div>
+  </div>
+
+  <div class="fx-panel" data-step="end" hidden>
+    <h3 class="fx-big" data-focus tabindex="-1">See the difference?</h3>
+    <p class="fx-sub">Good design isn’t decoration.<br>It’s communication.</p>
+    <div class="row"><a class="btn solid" href="#archive">EXPLORE THE WORK</a><a class="btn" href="#contact">LET’S TALK</a><button type="button" class="fx-skip" id="fx-replay">PLAY AGAIN</button></div>
+  </div>
 </section>
 
 <!-- 6 · EXIT -->
@@ -140,6 +167,8 @@
       <p id="wa-note" class="tech" role="status" dir="ltr" lang="en">Choose a service or write your own message.</p>
     </form>
   </div>
+</section>
+</main>
 <footer class="foot">
   <img src="assets/logo/maze-sand.svg" alt="MAZE" width="96" height="20">
   <nav aria-label="Contact and legal">
@@ -151,8 +180,5 @@
   </nav>
   <p class="tech">© 2026 MAZE</p>
 </footer>
-</section>
-</div></main>
-
 </body>
 </html>
