@@ -4,8 +4,8 @@
   // ---- The maze: rooms on a grid (x → east, y ↓ south) and the corridors between them
   var G = {
     rooms: { entry: { x: 0, y: 0, l: 'ENTRY' }, fix: { x: 1, y: 0, l: 'FIX THIS', m: 'FIX' }, paths: { x: 0, y: 1, l: 'PATHS' },
-             archive: { x: 1, y: 1, l: 'ARCHIVE' }, case: { x: 2, y: 1, l: 'CASE' }, contact: { x: 1, y: 2, l: 'EXIT' } },
-    edges: [['entry', 'paths'], ['paths', 'archive'], ['archive', 'fix'], ['entry', 'fix'], ['archive', 'case'], ['archive', 'contact']]
+             archive: { x: 1, y: 1, l: 'ARCHIVE' }, case: { x: 2, y: 1, l: 'CASE' }, about: { x: 1, y: 2, l: 'ABOUT' }, contact: { x: 1, y: 3, l: 'EXIT' } },
+    edges: [['entry', 'paths'], ['paths', 'archive'], ['archive', 'fix'], ['entry', 'fix'], ['archive', 'case'], ['archive', 'about'], ['about', 'contact']]
   };
   var S = { cur: 'entry', visited: { entry: 1 }, trav: {}, caseOpen: false, prog: 0, left: false };
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -47,12 +47,13 @@
       el.appendChild(w);
     } else el.hidden = false;
     rooms[id] = el;
-    el.addEventListener('scroll', function () { if (S.cur === id) progress(); }, { passive: true });
+    el._top = 0;
+    el.addEventListener('scroll', function () { el._top = el.scrollTop; if (S.cur === id) progress(); }, { passive: true });
   });
 
   // ---- Mini map
   var svgNS = 'http://www.w3.org/2000/svg', svg = $('#map-svg');
-  svg.setAttribute('viewBox', '0 0 176 116'); svg.setAttribute('width', 176); svg.setAttribute('height', 116);
+  svg.setAttribute('viewBox', '0 0 176 154'); svg.setAttribute('width', 176); svg.setAttribute('height', 154);
   function cx(id) { return PAD + G.rooms[id].x * GX + NW / 2; }
   function cy(id) { return PAD + G.rooms[id].y * GY + NH / 2; }
   G.edges.forEach(function (e) {
@@ -115,7 +116,7 @@
     if (id === S.cur) return;
     var p = route(S.cur, id);
     for (var i = 0; i < p.length - 1; i++) { S.trav[ek(p[i], p[i + 1])] = 1; S.visited[p[i]] = 1; }
-    S.visited[id] = 1; S.cur = id; if (id !== 'entry') S.left = true;
+    S.visited[id] = 1; S.cur = id; if (id !== 'entry') S.left = true; rooms[id]._top = rooms[id].scrollTop;
     stage.style.setProperty('--cx', G.rooms[id].x); stage.style.setProperty('--cy', G.rooms[id].y);
     ids.forEach(function (r) { if (r === id) rooms[r].removeAttribute('inert'); else rooms[r].setAttribute('inert', ''); });
     if (o.push !== false) history.pushState({ room: id }, '', '#' + id);
@@ -147,18 +148,46 @@
     var t = nb(S.cur).filter(function (n) { return dir(S.cur, n) === want; })[0];
     if (t) { e.preventDefault(); go(t); }
   });
-  // Entry room only: a wheel or swipe forward walks into the first corridor (all other rooms scroll normally)
-  var lock = false, ty = null, entry = rooms.entry;
-  entry.addEventListener('wheel', function (e) { if (e.deltaY > 40 && !lock && S.cur === 'entry') { lock = true; go('paths'); setTimeout(function () { lock = false; }, 900); } }, { passive: true });
-  entry.addEventListener('touchstart', function (e) { ty = e.touches[0].clientY; }, { passive: true });
-  entry.addEventListener('touchend', function (e) { if (ty !== null && ty - e.changedTouches[0].clientY > 70 && S.cur === 'entry') go('paths'); ty = null; }, { passive: true });
+  // Vertical scrolling continues through the maze: a fresh push past the top or bottom edge of a room walks to the room above or below.
+  // Scrolling inside a room is untouched; momentum from a scroll that began mid-room never triggers a move.
+  var acc = 0, lastW = 0, startEdge = false, lock = false;
+  function vnb(d) { return nb(S.cur).filter(function (n) { return dir(S.cur, n) === d; })[0]; }
+  function atEdgeKnown(r, d) { return d === 'south' ? r._top + r.clientHeight >= r.scrollHeight - 2 : r._top <= 1; } // position before the current wheel gesture scrolled it
+  function atEdge(r, d) { return d === 'south' ? r.scrollTop + r.clientHeight >= r.scrollHeight - 2 : r.scrollTop <= 1; }
+  function push(d) { var t = vnb(d); if (t && !lock) { lock = true; go(t); setTimeout(function () { lock = false; }, 900); } }
+  ids.forEach(function (id) {
+    var r = rooms[id], ty = null, tx = 0, te = null;
+    r.addEventListener('wheel', function (e) {
+      if (S.cur !== id || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+      var d = e.deltaY > 0 ? 'south' : 'north', now = Date.now();
+      if (now - lastW > 200) { startEdge = atEdgeKnown(r, d); acc = 0; }
+      lastW = now;
+      if (!startEdge || !vnb(d)) return;
+      acc += Math.abs(e.deltaY);
+      if (acc > (id === 'entry' ? 40 : 120)) { acc = 0; push(d); }
+    }, { passive: true });
+    r.addEventListener('touchstart', function (e) { ty = e.touches[0].clientY; tx = e.touches[0].clientX; te = { south: atEdge(r, 'south'), north: atEdge(r, 'north') }; }, { passive: true });
+    r.addEventListener('touchend', function (e) {
+      if (ty === null || S.cur !== id) return;
+      var dy = ty - e.changedTouches[0].clientY, dx = tx - e.changedTouches[0].clientX; ty = null;
+      if (Math.abs(dy) < 80 || Math.abs(dy) < Math.abs(dx) * 1.5) return;
+      var d = dy > 0 ? 'south' : 'north';
+      if (vnb(d) && te && te[d] && atEdge(r, d)) push(d);
+    }, { passive: true });
+  });
+
+  // The browser may scroll the (overflow hidden) world to a #hash target or a focused element: always snap it back, the camera is the only mover
+  var world = $('#world');
+  function unscroll() { if (world.scrollLeft || world.scrollTop) { world.scrollLeft = 0; world.scrollTop = 0; } }
+  world.addEventListener('scroll', unscroll, { passive: true });
+  window.addEventListener('hashchange', unscroll); window.addEventListener('load', unscroll);
 
   // ---- Start (supports deep links like #archive)
   ids.forEach(function (id) { if (id !== 'entry') rooms[id].setAttribute('inert', ''); });
   stage.style.setProperty('--cx', 0); stage.style.setProperty('--cy', 0);
   var h0 = location.hash.slice(1);
   history.replaceState({ room: 'entry' }, '', location.pathname + location.search);
-  render(); document.body.dataset.room = 'entry';
+  unscroll(); render(); document.body.dataset.room = 'entry';
   if (G.rooms[h0] && h0 !== 'entry' && h0 !== 'case') go(h0, { nofocus: true });
 
   window.MazeNav = { go: go, openCase: openCase, closeCase: closeCase, graph: G, state: S, current: function () { return S.cur; } };

@@ -234,7 +234,7 @@ body.touring .foot{padding-bottom:6rem}
 .map{position:fixed;right:var(--pad);bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:9;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:.4rem}
 .map[hidden]{display:none}
 .map-toggle{display:none;font:600 .75rem var(--font);letter-spacing:.12em;color:var(--ink);background:var(--bg);border:1px solid var(--sand);min-height:44px;min-width:60px;cursor:pointer}
-.map-panel{position:relative;width:176px;height:116px;background:var(--bg);border:1px solid var(--sand);display:block}
+.map-panel{position:relative;width:176px;height:154px;background:var(--bg);border:1px solid var(--sand);display:block}
 .map-panel svg{position:absolute;inset:0}
 .map-panel line{stroke:var(--umber);stroke-width:1;stroke-dasharray:3 3}
 .map-panel line.open{stroke:var(--sand)}
@@ -253,3 +253,22 @@ body.touring .dock,body.touring .map{bottom:calc(5.2rem + env(safe-area-inset-bo
   .dock{max-width:calc(100% - 6rem)}
 }
 @media(prefers-reduced-motion:reduce){#stage,.you{transition:none}}
+
+/* ---- v6: about, contact layout, compact paths ---- */
+.he-right{text-align:right;align-self:flex-end}
+.c-grid{grid-template-areas:"main" "form"}
+.c-main{grid-area:main}.cform{grid-area:form}
+@media(min-width:900px){.c-grid{grid-template-columns:1fr 1.4fr;grid-template-areas:"form main";gap:4rem;align-items:start}}
+.ab-grid{display:grid;gap:1.25rem 4rem;grid-template-columns:1fr;align-items:start}
+@media(min-width:900px){.ab-grid{grid-template-columns:1fr 1.3fr}.ab-grid .mid{grid-column:1/-1}}
+.ab-lead{margin:0 0 .75rem;font-size:clamp(1.4rem,3.4vw,2.2rem);line-height:1.2;font-weight:300}
+.ab-ph{margin:0;color:var(--sand);font-size:1.1rem}
+.tag-ph{display:inline-block;margin-inline-start:.5rem;font:700 .65rem var(--font);letter-spacing:.14em;border:1px solid var(--accent);color:var(--sand);padding:.15rem .5rem}
+.ab-facts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem;border-top:1px solid var(--umber);padding-top:1rem}
+.ab-photo{align-self:end}
+#paths .room-in{gap:1rem;padding-block:6rem 5rem}
+#paths .mid{font-size:clamp(1.4rem,3.6vw,2.2rem)}
+#paths .paths a{padding:.8rem 1rem;gap:.15rem}
+#paths .paths b{font-size:1.3rem}
+#paths .paths .he{font-size:1rem}
+#contact .big{font-size:clamp(2.4rem,6.2vw,5.6rem)}

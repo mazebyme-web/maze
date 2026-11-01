@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://use.typekit.net/yet5abx.css">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/fixthis.css">
+<script src="js/nav.js" defer></script>
 <script src="js/projects.js" defer></script>
 <script src="js/archive.js" defer></script>
 <script src="js/fixthis-config.js" defer></script>
@@ -24,12 +25,19 @@
     <a href="#paths">Paths</a>
     <a href="#archive">Work</a>
     <a href="#fix">Fix this</a>
+    <a href="#about">About</a>
     <a class="exit" href="#contact">Exit the maze</a>
   </nav>
 </header>
 
+<nav id="dock" class="dock" aria-label="Exits from this room"></nav>
+<aside id="map" class="map" aria-label="Maze map" hidden>
+  <button type="button" id="map-toggle" class="map-toggle" aria-expanded="false" aria-controls="map-panel">MAP</button>
+  <div id="map-panel" class="map-panel"><svg id="map-svg" aria-hidden="true"></svg><i class="you" id="you" aria-hidden="true"></i></div>
+  <p class="sr" id="map-live" aria-live="polite"></p>
+</aside>
 <div id="tour" class="tour" hidden><span id="tour-step"></span><button type="button" class="btn" id="tour-back">BACK</button><button type="button" class="btn solid" id="tour-next">NEXT</button><button type="button" class="btn" id="tour-exit">LEAVE TOUR</button></div>
-<main>
+<main id="world"><div id="stage">
 <!-- 1 · ENTRY -->
 <section id="entry" class="screen" aria-labelledby="h-entry">
   <div class="tech-row" aria-hidden="true"><span>N° 001</span><span>GRAPHIC DESIGN / BRANDING / WEB</span><span>ISRAEL · 2026</span></div>
@@ -44,7 +52,7 @@
     <a class="btn solid" href="#paths">ENTER THE MAZE</a>
     <a class="btn" href="#archive">SKIP THE INTRO</a>
   </div>
-  <p class="hint">Move your pointer or touch the headline to reveal what MAZE does. Scroll to continue ↓</p>
+  <p class="hint">Move your pointer or touch the headline to reveal what MAZE does. Scroll or swipe up to step into the maze ↓</p>
 </section>
 
 <!-- 2 · PATHS -->
@@ -145,11 +153,25 @@
 </section>
 
 <!-- 6 · EXIT -->
+<section id="about" class="screen" aria-labelledby="h-about">
+  <div class="ab-grid">
+    <h2 id="h-about" class="mid">ABOUT</h2>
+    <div class="ab-text" lang="he" dir="rtl">
+      <p class="ab-lead">MAZE הוא סטודיו עצמאי לעיצוב גרפי ומיתוג.</p>
+      <p class="ab-ph">כאן יופיע הסיפור שלך: מי את, איך את עובדת ומה מייחד את הגישה שלך. <span class="tag-ph" lang="en" dir="ltr">PLACEHOLDER COPY</span></p>
+    </div>
+    <ul class="ab-facts tech" aria-label="Services">
+      <li>01 / Branding &amp; identity</li><li>02 / Digital design</li><li>03 / Landing pages</li><li>04 / Print &amp; graphic projects</li>
+    </ul>
+    <p class="note ab-photo">Portrait or studio photo: to be added.</p>
+  </div>
+</section>
+
 <section id="contact" class="screen" aria-labelledby="h-contact">
   <div class="c-grid">
     <div class="c-main">
       <h2 id="h-contact" class="big">YOUR BUSINESS IS NEXT.</h2>
-      <p class="he he-left" lang="he" dir="rtl">מה העסק שלכם צריך?</p>
+      <p class="he he-right" lang="he" dir="rtl">מה העסק שלכם צריך?</p>
       <ol class="svc" lang="he" dir="rtl" aria-label="בחירת שירות">
         <li><button type="button" data-svc="מיתוג וזהות חזותית"><i>01</i>מיתוג וזהות חזותית</button></li>
         <li><button type="button" data-svc="עיצוב דיגיטלי"><i>02</i>עיצוב דיגיטלי</button></li>
@@ -167,8 +189,6 @@
       <p id="wa-note" class="tech" role="status" dir="ltr" lang="en">Choose a service or write your own message.</p>
     </form>
   </div>
-</section>
-</main>
 <footer class="foot">
   <img src="assets/logo/maze-sand.svg" alt="MAZE" width="96" height="20">
   <nav aria-label="Contact and legal">
@@ -180,5 +200,8 @@
   </nav>
   <p class="tech">© 2026 MAZE</p>
 </footer>
+</section>
+</div></main>
+
 </body>
 </html>
